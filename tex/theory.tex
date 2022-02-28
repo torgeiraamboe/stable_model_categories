@@ -1,0 +1,298 @@
+
+
+\section{Definition}
+
+Before we define stable model categories and explore their properties, 
+we recall some definitions and facts. 
+
+\begin{definition}{Pointed category}
+
+We call a category $\mathcal{C}$ pointed if it has both an initial and a terminal object which coincide. 
+This object is often called the zero object, 
+and naturally denoted by $0$. 
+\end{definition}
+
+In the previous lecture we defined the suspension of an object $X$ in a model category $\mathcal{C}$ to be the homotopy pushout of the diagram $0\longleftarrow X \longrightarrow 0$, 
+i.e. 
+\begin{center}
+\begin{tikzcd}
+X \arrow[r] \arrow[d] & 0 \arrow[d] \\
+0 \arrow[r]           & \Sigma X   
+\end{tikzcd}
+\end{center}
+
+The assignment $X\longrightarrow \Sigma X$ almost defines an endofunctor $\Sigma : \mathcal{C}\longrightarrow \mathcal{C}$ naturally referred to as the suspension functor. 
+It is a functor on the homotopy category of the model category, 
+which we previously defined to be the localization of the model category at the weak equivalences. 
+Since we use the homotopy pushout to define it, 
+we only have functoriality up to weak equivalence in the model category itself, 
+but this reduces to actual functoriality on the homotopy category. 
+
+\begin{definition}{Stable model category}
+
+A model category $\mathcal{M}$ is called stable if it is pointed, 
+and the endofunctor $\Sigma$ is an autoequivalence on the homotopy category $M[Q^{-1}]$. 
+\end{definition}
+
+After seeing a definition it is important to see some examples. 
+There are two important motivating examples of stable model categories, 
+and luckily one is from algebra and one is from topology. 
+
+The algebraic example is the category of unbounded complexes of modules over some ring. 
+Here the suspension functor is just the shift functor, 
+which we know is invertible and hence an autoequivalence. 
+In a previous lecture we also (almost) defined a model structure on this category. 
+We defined it for chain complexes in non-negative degrees, 
+but the idea is the same. We define the weak equivalences to be the quasi-isomorphisms, 
+the fibrations to be the surjections, 
+and induce the cofibrations to be the ones that have the lifting property with respect to surjective quasi-isomorphisms. 
+We also know that the complex 
+\begin{equation*}
+    \cdots \longrightarrow 0 \longrightarrow 0 \longrightarrow 0 \longrightarrow \cdots 
+\end{equation*}
+is a zero object in that category. 
+Hence it is a stable model category. 
+It's homotopy category is the derived category of $R$, 
+i.e. $D(R)$. 
+This category we know is triangulated from the homological algebra course. 
+Even more generally we can do this for any additive category. 
+
+\section{Spectra}
+
+The topological example is (i think) for most people less familiar. 
+To introduce it we need some machinery from an earlier lecture. 
+
+Recall that Brown representability makes sure that certain nice cohomological functors are representable. 
+In the category of topological spaces, 
+there are several different notions of cohomology, 
+even generalized versions. 
+For those who have had the course MA3403 - Algebraic Topology 1, 
+we know that a cohomology theory is required to satisfy the five Eilenberg-Steenrod axioms. 
+\begin{itemize}
+    \item Homotopy
+    \item Excision
+    \item Dimension
+    \item Additivity
+    \item Exactness
+\end{itemize}
+
+Removing the axiom of dimensionality, 
+we get what are called generalized cohomology theories. 
+These are often a bit more hard to explain and use, 
+but the most famous example is topological K-theory.
+
+In the algebraic case this is done by letting the new objects be chain complexes instead of just objects i the additive category. 
+This is a generalization as we can interpret any one object as a chain complex centered in degree zero. 
+So why did we do this?
+
+Homoloical algebra is very much about (co)homology, 
+and passing to chain complexes instead of single objects allows us to do all (co)homology constructions using a single object, 
+i.e. defining the n'th (co)homology to be cycles modulo boundaries in degree $n$. 
+The way we use (co)homology in algebraic topology is to assign a chain complex to a space and apply this (co)homology construction to it. 
+
+
+Anyways... 
+These generalized cohomology theories have their own set of cohomology functors, 
+which are functors $\mathcal{E}^n:Top \longrightarrow Grp$, 
+and it turns out that all these satisfy the niceness conditions required to use Brown representability on the homotopy category of CW complexes. 
+This means that we can represent them by objects in $HoCW$. 
+Thus we have for every $n$ and every generalized cohomology theory $\mathcal{E}$ a topological space $E_n$ such that $\mathcal{E}^n = [-, E_n]$. 
+
+The collection of the spaces $E = \{E_n\}$ together with maps $\Sigma E_n \longrightarrow E_{n+1}$ is called a spectrum. 
+
+
+\begin{example}{Suspension spectrum}
+
+Take any topological space $T$ and let $E_0 = T$. 
+We then set $E_n = \Sigma^n T$, and the maps to be isomorphisms. 
+\end{example}
+
+\begin{example}{The sphere spectrum}
+    
+    Let $E_n = S^n$ and the maps $\Sigma S^n \longrightarrow S^{n+1}$ be the canonical homeomorphisms. 
+    Then we call $\mathbb{S}=\{S^n\}$ the sphere spectrum. 
+    It is also the suspension spectrum of $S^0$.
+\end{example}
+
+The sphere spectrum represents cohomotopy as a cohomology theory. 
+The corresponding homology theory is stable homotopy theory. 
+
+\begin{example}{The Eilenberg-MacLane spectrum}
+    
+    Say we want to compute ordinary singular cohomology. 
+    This theory is as we now know represented by a spectrum. 
+    We then have $H^n(X;G) = [X, K(G, n)]$, for some space $K(G, n)$. 
+    These spaces are called the n-th Eilenberg Maclane space og $G$ and is a space such that 
+    \begin{equation*}
+        \pi_m(K(G, n)) = 
+        \begin{cases}
+            0, \quad m\neq n \\
+            G, \quad m=n
+        \end{cases}
+    \end{equation*}
+    All these Eilenberg-MacLane spaces neatly form a spectrum called the Eilenberg-MacLane spectrum. 
+    For more information, take the course MA3408 - Algebraic topology 2.
+\end{example}
+
+We see that we have many spectra, 
+and as all things they form a category. 
+The maps are maps between all the topological spaces, 
+such that they commute with the maps inside the spectra. 
+We can kind of think about spectra as being the closest thing we have to chain complexes in topology, 
+and that intuition can get you quite far. 
+
+In almost the same way as before, 
+the suspension functor is built into the objects, 
+and applying the functor merely ``shifts'' the spectrum to the left, 
+same as for chain complexes. 
+This is at least very clear using suspension spectra. 
+We can also shift back, 
+which coincide on the homotopy category of spectra. 
+
+We have not talked about the model structure on spectra, 
+but it comes from the model structure we already had on topological spaces, 
+just in some sense stabilized. 
+For the people familiar with the theory, 
+we can stabilize the induced model structure from topological spaces by Bousfield localizing at the homology theory $\pi_\ast(-)$. 
+
+\subsection*{Ring spectra}
+
+Often we really want to collect the (co)homological information together, 
+which often is done by studying the graded homology group, 
+or even better the graded cohomology ring of a space. 
+This is a total invariant. 
+If we want to represent a functor that lands in graded abelian groups, 
+we need a graded object of topological spaces. 
+This is where the spectra comes in. 
+
+The total cohomology should then not be understood as a collection of abelian groups, 
+or for generalized cohomology, 
+$\mathcal{E}^* $-modules, 
+where $\mathcal{E}^*$ is the cohomology of a point. 
+It should be understood as a graded ring, 
+or a graded $\mathcal{E}^* $-algebra. 
+This means that we need a graded $\mathcal{E}^*$-algebra in topological spaces to represent the total cohomology functor. 
+These objects are the so called ring spectra in topological spaces and are the correct objects for representing graded cohomology algebras of spaces. 
+
+\begin{theorem}
+
+Let $M$ be a stable model category with a compact generator $P$. 
+Then $M$ is equivalent to a category of modules over a ring spectrum.
+
+More precisely there is a one object $Sp$-category $C$ with $A\simeq End_M(P)$ an $A_{\infty}$-algebra such that $M\simeq AMod$
+\end{theorem}
+
+An $Sp$-category is kind of a non-linear dg-category.
+
+%https://www.sciencedirect.com/science/article/pii/S004093830200006X
+
+\begin{theorem}
+
+Let $M$ be a stable model category (may need some niceness conditions). 
+Then $M$ is equivalent to a category of presheaves of ring spectra. 
+\end{theorem}
+
+An example is the category of modules over the commutative ringspectrum $H\mathbb{Q}$, 
+which is Quillen equivalent to the category of dg algebras over $\mathbb{Q}$. 
+
+
+\section{Triangulation on the homotopy category}
+
+The main reason to introduce anything with the prefix ``stable'' is seemingly to show that it is triangulated, 
+so we will do just that. 
+We have only seen this once so far in this seminar, 
+and that was when stabilizing a Frobenius category, 
+which made it triangulated. 
+There we had some category, 
+with some distinguished class of sequences, 
+where we could do fibrant and cofibrant replacements by injective or projective objects. 
+Since it was a Frobenius category, 
+these two types of objects, 
+i.e. the fibrant and the cofibrant ones, 
+in fact coincided. 
+This we know makes taking homotopy classes of maps equivalent to producing the derived category (Quillen localization). 
+Hence we had some model category, 
+where the suspension was an autoequivalence up to homotopy, 
+which made the stabilization (really the homotopy category) triangulated. 
+
+This idea continues, 
+and is formalized through defining the following to be a triangle in a stable model category. 
+
+\begin{center}
+\begin{tikzcd}
+    X \arrow[r] \arrow[d] & Y \arrow[r] \arrow[d] & 0 \arrow[d] \\
+    0 \arrow[r]           & Z \arrow[r]           & \Sigma X   
+\end{tikzcd}
+\end{center}
+
+Lets prove that this makes the homotopy category triangulated. 
+All the squares here represent homotopy pullbacks and homotopy puchouts. 
+
+\textbf{TR1:} The first axiom is satisfied due to the identity being a homotopy pullback of the zero object along $X$.  
+
+\begin{center}
+\begin{tikzcd}
+    X \arrow[r] \arrow[d] & X \arrow[r] \arrow[d] & 0 \arrow[d] \\
+    0 \arrow[r]           & 0 \arrow[r]           & \Sigma X   
+\end{tikzcd}
+\end{center}
+
+The second part comes from iterated homotopy pushouts. 
+
+\begin{center}
+\begin{tikzcd}
+    X \arrow[r] \arrow[d] & Y \arrow[r] \arrow[d] & 0 \arrow[d] \\
+    0 \arrow[r]           & 0\coprod_X Y \arrow[r]           & (0\coprod_X Y)\coprod_Y 0   
+\end{tikzcd}    
+\end{center}
+
+Since iterated homotopy pushout is again a homotopy pushput, 
+we know that the space $ (0\coprod_X Y)\coprod_Y 0 $ must be homotopy equivalent to $\Sigma X$. 
+
+\textbf{TR2:} The second axiom comes from attaching two zeroes to a distinguished triangle. 
+Then we take the homotopy pushout, 
+which must be homotopy equivalent to $\Sigma Y$.
+
+\begin{center}
+\begin{tikzcd}
+    X \arrow[r] \arrow[d] & Y \arrow[r] \arrow[d] & 0 \arrow[d] \\
+    0 \arrow[r]           & Y/X \arrow[r]\arrow[d] & \Sigma X \arrow[d] \\
+                          & 0 \arrow[r]           & \Sigma Y 
+\end{tikzcd}    
+\end{center}
+
+The $-1$ sign that appears in the shifted triangle occurs when ``transposing'' the ``vertical'' distinguished triangle
+
+\begin{center}
+\begin{tikzcd}
+    Y \arrow[r] \arrow[d] & 0 \arrow[d] \\
+    Y/X \arrow[r]\arrow[d] & \Sigma X \arrow[d] \\
+    0 \arrow[r]           & \Sigma Y 
+\end{tikzcd}    
+\end{center}
+
+into a ``horizontal'' one to get it to the proper form. 
+
+
+\textbf{TR3:} I unfortunately couldn't quite find a nice and easy diagram argument for this axiom. 
+But, it will be proven next time using stable derivators. 
+
+
+\textbf{TR4:} The fourth and final axiom is the octahedral axiom. 
+To prove it we must show that the composition of two triangles again form a triangle nicely. 
+As usual we attach some zeroes to the composition diagram, 
+and take homotopy pushouts until we reach a suitable end. 
+By inspecting the iterated homotopy pushouts, 
+we see that we indeed get the following diagram.  
+
+\begin{center}
+\begin{tikzcd}
+X \arrow[r] \arrow[d] & Y \arrow[r] \arrow[d]   & Z \arrow[d] \arrow[r]   & 0 \arrow[d]                  &             \\
+0 \arrow[r]           & Y/X \arrow[r] \arrow[d] & Z/X \arrow[r] \arrow[d] & \Sigma X \arrow[d] \arrow[r] & 0 \arrow[d] \\
+                      & 0 \arrow[r]             & Z/Y \arrow[r]           & \Sigma Y \arrow[r]           & \Sigma Y/X 
+\end{tikzcd}   
+\end{center}
+
+Note that this proof was done in a bit more detail and explanation in the actual presentation. 
+I'm sorry for this proof being short an detail lacking, 
+but it must be so due to time constraints.. 
